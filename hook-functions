@@ -739,6 +739,10 @@ auto_add_modules()
 		block)
 			copy_modules_dir kernel/drivers/block
 			copy_modules_dir kernel/drivers/nvme
+			copy_modules_dir kernel/drivers/nvdimm
+			copy_modules_dir kernel/drivers/dax
+			copy_modules_dir kernel/drivers/acpi/nfit
+
 			modules="$modules vmd"
 		;;
 		ubi)

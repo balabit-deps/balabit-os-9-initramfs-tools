@@ -1,3 +1,10 @@
+initramfs-tools (0.140ubuntu13.1) jammy; urgency=medium
+
+  * Backport pmem support from kinetic by adding the nvdimm, dax, and nfit
+    modules (LP: #1981385)
+
+ -- Dan Bungert <daniel.bungert@canonical.com>  Thu, 27 Oct 2022 11:44:07 -0600
+
 initramfs-tools (0.140ubuntu13) jammy; urgency=medium
 
   * Lower the compression levels for zstd and lz4 (LP: #1958148)
