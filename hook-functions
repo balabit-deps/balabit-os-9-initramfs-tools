@@ -640,7 +640,7 @@ auto_add_modules()
 	local modules=
 
 	if [ "$#" -eq 0 ] ; then
-		set -- base net ide scsi block ata i2o dasd ieee1394 firewire mmc usb_storage fb virtual nx
+		set -- base hw_random net ide scsi block ata i2o dasd ieee1394 firewire mmc usb_storage fb virtual nx
 	fi
 
 	for arg in "$@" ; do
@@ -710,6 +710,9 @@ auto_add_modules()
 
 			# Needed for periodic fsck
 			copy_modules_dir kernel/drivers/rtc
+		;;
+		hw_random)
+			copy_modules_dir kernel/drivers/char/hw_random
 		;;
 		net)
 			copy_modules_dir kernel/drivers/net \

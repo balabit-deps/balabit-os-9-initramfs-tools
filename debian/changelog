@@ -1,3 +1,9 @@
+initramfs-tools (0.140ubuntu13.2) jammy; urgency=medium
+
+  * Add char/hw_random drivers (LP: #1983359)
+
+ -- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>  Wed, 14 Jun 2023 08:54:33 +0200
+
 initramfs-tools (0.140ubuntu13.1) jammy; urgency=medium
 
   * Backport pmem support from kinetic by adding the nvdimm, dax, and nfit
