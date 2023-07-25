@@ -665,6 +665,9 @@ auto_add_modules()
 			copy_modules_dir kernel/drivers/usb/isp1760
 			copy_modules_dir kernel/drivers/usb/musb
 			copy_modules_dir kernel/drivers/usb/renesas_usbhs
+			copy_modules_dir kernel/drivers/usb/typec/ucsi
+			# also STM's STUSB160x type-C controller for Tegra IGX
+			modules="$modules stusb160x"
 			# and any extcon drivers for USB
 			modules="$modules extcon-usb-gpio extcon-usbc-cros-ec"
 			# Add the axp20x_usb_power power supply driver,

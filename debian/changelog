@@ -1,3 +1,22 @@
+initramfs-tools (0.140ubuntu13.4) jammy; urgency=medium
+
+  * hook-functions: add stusb160x kernel module for Tegra IGX (LP: #2027636)
+
+ -- Loïc Minier <loic.minier@ubuntu.com>  Tue, 25 Jul 2023 11:54:44 +0200
+
+initramfs-tools (0.140ubuntu13.3) jammy; urgency=medium
+
+  [ Loïc Minier ]
+  * Include kernel/drivers/usb/typec/ucsi with MODULES=most along with other
+    USB storage drivers; LP: #2027636.
+
+  [ Benjamin Drung ]
+  * Port the net autopkgtest to the common test framework. This drops
+    depending on downloading a cloud image from the Internet and reduces
+    the execution time from 3:19 min down to 0:57 min. (LP: #2027575)
+
+ -- Benjamin Drung <bdrung@ubuntu.com>  Thu, 13 Jul 2023 13:12:19 +0200
+
 initramfs-tools (0.140ubuntu13.2) jammy; urgency=medium
 
   * Add char/hw_random drivers (LP: #1983359)

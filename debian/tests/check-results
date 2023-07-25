@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 import json
-import os
+import pathlib
+import re
 import sys
 
 in_error = False
@@ -51,17 +52,32 @@ def has_ipv4_addr(name, wanted_addr):
             return
     error("link {} not found".format(name))
 
-result_dir = sys.argv[1]
-with open(os.path.join(result_dir, 'link.json')) as fp:
-    links = json.load(fp)
-with open(os.path.join(result_dir, 'addr.json')) as fp:
-    addrs = json.load(fp)
 
-with open(os.path.join(result_dir, 'ps.txt'), encoding='utf-8', errors='replace') as fp:
-    ps_output = fp.read()
+def extract_from_log(log: str, key: str) -> str:
+    """Extract the command output from the given log output.
 
-if 'dhclient' in ps_output:
-    error("dhclient appears to be running")
+    The output must be framed by a header and a footer line. The header
+    line contains the key surrounded by 10 # characters. The footer
+    line consist of 40 # characters.
+    """
+    marker = "#" * 10
+    footer = "#" * 40
+    match = re.search(
+        f"^{marker} {re.escape(key)} {marker}\n(.*?\n){footer}$",
+        log,
+        flags=re.DOTALL | re.MULTILINE,
+    )
+    if not match:
+        error(f"Block '{marker} {key} {marker}' not found in log output")
+        sys.exit(1)
+    return match.group(1)
+
+
+log_file = sys.argv[1]
+log = pathlib.Path(log_file).read_text(encoding="ascii")
+addrs = json.loads(extract_from_log(log, "ip -json addr"))
+links = json.loads(extract_from_log(log, "ip -json link"))
+ps_output = extract_from_log(log, "ps aux")
 
 i = 2
 while i < len(sys.argv):
